@@ -1,0 +1,8 @@
+# write an array of bytes to stdout
+print: { 1$ system 0 }
+
+# same as [print], but also appends a newline
+println: { '\n_@+ print! }
+
+# read a single byte from stdin
+readByte: { 1 system 1 }

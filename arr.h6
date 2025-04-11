@@ -1,0 +1,22 @@
+# rotate an array left by one
+ArrRoL: { .@0_ $@<$ @+ }
+
+# signature:
+#   initialValue array function [lfold] output
+#
+# the accumulate function has to have the signature:
+#   accVal arrVal [F] accVal
+lfold: { &-v@* {;;} {$.@<$@0 &---v &---v {$}$@+ ! $ &--v lfold! r;; } l?! }
+
+# rev(0 ..< N)
+revRange: { . { ; {} } { . 1- revRange! $ 1-_ $ @+ } l?! }
+
+# 0 ..< N
+range: { . { ; {} } { . 1- range! $ 1-_ @+ } l?! }
+
+# signature:
+#   array function [map] output
+#
+# the mapping function has to have the signature:
+#   value [F] outval
+map: { {_@+} @+ {}r lfold! }
