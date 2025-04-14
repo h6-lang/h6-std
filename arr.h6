@@ -20,3 +20,15 @@ range: { . { ; {} } { . 1- range! $ 1-_ @+ } l?! }
 # the mapping function has to have the signature:
 #   value [F] outval
 map: { {_@+} @+ {}r lfold! }
+
+# signature:
+#   arr1 arr2 [zip] output
+#
+# the output array will be: { {A0 B0} {A1 B1} {A2 B2} ... }
+zip: { _{}_@+ $ {$! $l$ .@0$@< r _$_$@+_ l$ @+ _$_$@+ } lfold! @<@0 }
+
+# signature:
+#   A B [match] output
+#
+# recursively checks for equality of values
+match: { .typeid { = } { .@*r $ .@*r &---v &---v = {;;0} {zip! { !match!* } 1r lfold!} l?! r;; } l?! }
