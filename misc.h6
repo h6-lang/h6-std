@@ -6,3 +6,6 @@
 #
 # repeats the given function until the first output of it is 0
 do: {._@+! $ {;} do l?!}
+
+ReadBe32: { . @<@<ReadBe16! 65536* $ ReadBe16! + }
+ReadBe16: { . @<@0 256* $@0 + }

@@ -49,3 +49,30 @@ rev: { { _$@+ } {}r lfold! }
 #
 # 0-indexed
 get: { range! {;{@<}} flatMap! !@0 }
+
+# signature:
+#   Val Arr Idx [set] out
+#
+# 0-indexed
+set: { split! @< l _$@+@+ }
+
+# signature:
+#   ... Arr Idx F [modify] out
+#
+# signature for F:
+#   ... OldValue [F] NewValue
+#
+# 0-indexed
+modify: { r$.l.r get!$ { $_ l$@+! } $_@+! set! }
+
+# signature:
+#   Arr Num [split] FirstN Rem
+split: { {}r range! {;{.@0_ l$ @+ $ @< }} flatMap! ! }
+
+# signature
+#   Arr Num [take] Out
+take: { split! ; }
+
+# signature
+#   Arr Num [drop] Out
+drop: { split! $; }
