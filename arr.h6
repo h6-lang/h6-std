@@ -6,7 +6,7 @@ ArrRoL: { .@0_ $@<$ @+ }
 #
 # the accumulate function has to have the signature:
 #   accVal arrVal [F] accVal
-lfold: { &-v@* {;;} {$.@<$@0 &---v &---v {$}$@+ ! $ &--v lfold! r;; } l?! }
+lfold: { &-v@* {;;} {$.@<$@0 &--vv {$}$@+ ! $ &--v lfold! r;; } l?! }
 
 # rev(0 ..< N)
 revRange: { . { ; {} } { . 1- revRange! $ 1-_ $ @+ } l?! }
