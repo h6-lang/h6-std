@@ -15,18 +15,32 @@ revRange: { . { ; {} } { . 1- revRange! $ 1-_ $ @+ } l?! }
 range: { . { ; {} } { . 1- range! $ 1-_ @+ } l?! }
 
 # signature:
-#   array function [map] output
+#   array F [map] output
 #
 # the mapping function has to have the signature:
 #   value [F] outval
 map: { {_@+} @+ {}r lfold! }
 
 # signature:
-#   array function [map] output
+#   array F [flatMap] output
 #
 # the mapping function has to have the signature:
 #   value [F] outval
 flatMap: { {@+} @+ {}r lfold! }
+
+# signature:
+#   array F [filter] output
+#
+# signature of F:
+#   value [F] bool
+filter: { {.} $@+ { {;{}} {_} l?! } @+ flatMap! }
+
+# signature:
+#   array F [filterMap] output
+#
+# signature of F:
+#   value [F] Option
+filterMap: { { {{}} {_} optionSwitch! } @+ flatMap! }
 
 # signature:
 #   arr1 arr2 [zip] output
