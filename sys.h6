@@ -1,5 +1,5 @@
 # write an array of bytes to stdout
-print: { 1$ system 0 }
+print: { { 1$ system 0 0 } map!; }
 
 # same as [print], but also appends a newline
 println: { '\n_@+ print! }

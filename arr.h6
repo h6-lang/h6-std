@@ -5,7 +5,7 @@ ArrRoL: { .@0_ $@<$ @+ }
 #   initialValue array function [lfold] output
 #
 # the accumulate function has to have the signature:
-#   accVal arrVal [F] accVal
+#   accVal arrVal F [lfold] accVal
 lfold: { &-v@* {;;} {$.@<$@0 &--vv {$}$@+ ! $ &--v lfold! r;; } l?! }
 
 # rev(0 ..< N)
