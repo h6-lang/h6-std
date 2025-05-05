@@ -22,11 +22,42 @@ range: { . { ; {} } { . 1- range! $ 1-_ @+ } l?! }
 map: { {_@+} @+ {}r lfold! }
 
 # signature:
+#   array F [each] output
+#
+# the mapping function has to have the signature:
+#   value [F] outval
+#
+# similar to [map], but recurses for nested arrays
+each: {  _. { .typeid }$@+ ${each!}@+_ @+ { l?! }@+ map! }
+
+# signature:
 #   array F [flatMap] output
 #
 # the mapping function has to have the signature:
 #   value [F] outval
 flatMap: { {@+} @+ {}r lfold! }
+
+# signature:
+#   array scalar [distrib] output
+#
+# the output array will be: { {A0 S} {A1 S} {A2 S} ... }
+distrib: { _{_$_$@+}@+  map! }
+
+# signature:
+#   array [enum] output
+#
+# the output array will be: { {0 A0} {1 A1} {2 A2} ... }
+enum: { .@* range! $ zip! }
+
+# signature:
+#   array [where] output
+#
+# returns array of indexes where value is true
+#
+# for stdlib readers:
+#   this could be implemented more cleanly (but slower on larger arrays):
+#     where: { enum! { @<@0 } filter! {@0}map! 
+where: { enum! { . @<@0 {;none!} {@0 some!} l?! } filterMap! }
 
 # signature:
 #   array F [filter] output
@@ -46,6 +77,8 @@ filterMap: { { {{}} {_} optionSwitch! } @+ flatMap! }
 #   arr1 arr2 [zip] output
 #
 # the output array will be: { {A0 B0} {A1 B1} {A2 B2} ... }
+#
+# if you want to broadcast a scalar instead, see [distrib]
 zip: { _{}_@+ $ {$! $l$ .@0$@< r _$_$@+_ l$ @+ _$_$@+ } lfold! @<@0 }
 
 # signature:
